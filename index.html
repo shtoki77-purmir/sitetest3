@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2026 안전점검 보고서 장별 카드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f5f8;--card:#fff;--ink:#1c2733;--sub:#5b6773;--line:#d5dbe2;
+  --accent:#1f4e79;--mark:#ffe08a;--focus:#1f4e79;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141a21;--card:#1c242d;--ink:#e6ebf0;--sub:#9aa7b3;--line:#2f3a45;--accent:#7fb1e0;--mark:#7a5f10;--focus:#7fb1e0}}
+:root[data-theme="dark"]{--bg:#141a21;--card:#1c242d;--ink:#e6ebf0;--sub:#9aa7b3;--line:#2f3a45;--accent:#7fb1e0;--mark:#7a5f10;--focus:#7fb1e0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+h1{font-family:"Noto Serif KR",serif;font-size:1.6rem;margin:0 0 4px;letter-spacing:-.01em}
+.desc{margin:0 0 20px;color:var(--sub);font-size:.92rem}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:10px 0;z-index:2}
+.bar input[type=search]{flex:1 1 260px;font:inherit;padding:11px 14px;border:1.5px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+.bar input:focus,.file:focus-within,button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.file{font-size:.85rem;color:var(--accent);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;cursor:pointer;background:var(--card)}
+.file input{position:absolute;opacity:0;width:1px;height:1px}
+#count{margin:6px 0 14px;font-size:.92rem;color:var(--sub)}
+#count b{color:var(--accent);font-size:1.05rem}
+#list{display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:4px;padding:18px 20px}
+.card h2{font-family:"Noto Serif KR",serif;font-size:1.15rem;margin:0 0 10px}
+.card h2 span{color:var(--accent);margin-right:8px}
+.card p{margin:0 0 .7em;max-width:70ch}
+.card p:last-child{margin:0}
+mark{background:var(--mark);color:inherit;padding:0 1px;border-radius:2px}
+strong{font-weight:700}
+.empty{padding:40px 10px;text-align:center;color:var(--sub);border:1.5px dashed var(--line);border-radius:6px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>2026 행정안전부 안전점검 결과 보고서</h1>
+  <p class="desc">장별 내용을 카드로 확인하고, 제목·본문 키워드로 찾아보세요.</p>
+  <div class="bar">
+    <input type="search" id="q" placeholder="키워드 입력 (예: 시정, 450건, 예산)" aria-label="키워드 검색" autocomplete="off">
+    <label class="file">JSON 불러오기<input type="file" id="file" accept=".json,application/json"></label>
+  </div>
+  <div id="count" role="status" aria-live="polite"></div>
+  <div id="list"></div>
+</main>
+
+<script id="seed" type="application/json">
+[
+  {"장":"1","제목":"개요","본문":"본 보고서는 행정안전부 안전정책총괄과가 2026년 상반기 실시한 종합 안전점검 결과를 정리한 자료다.\n\n총 점검 건수는 **450건**이며, 지적사항 **120건** 중 시정 완료율은 **85%**이다. 예산 집행률은 **92%**, 총괄책임자는 **권혁수** 안전정책총괄과장이다."},
+  {"장":"2","제목":"분야별 결과","본문":"분야별 점검은 시설안전·교통안전·재난안전·산업안전 4개 분야로 진행됐다. 분야별 총합은 **450건**과 일치한다.\n\n지적사항 **115건** 중 80% 이상이 1분기 내 시정되었으며, 누적 시정 완료율은 **85%**으로 집계됐다."},
+  {"장":"3","제목":"예산 운용","본문":"상반기 예산 집행률 **90%**은 전년 동기 대비 5%p 상승한 수치다. 총괄 운영은 **권혁수** 과장이 직접 주재했고, 분기별 점검회의 5회를 개최했다."},
+  {"장":"4","제목":"향후 계획","본문":"상반기 실적을 되짚어 보면, 총 점검 건수는 **440건**으로 마감됐고 시정 완료율은 **82%**로 집계됐다.\n\n이를 바탕으로 하반기에는 미시정 과제 해소와 취약 분야 재점검을 중심으로 점검 체계를 보강할 계획이다."},
+  {"장":"5","제목":"결론","본문":"행정안전부 안전정책총괄과는 2026년 상반기 동안 **450건**의 안전점검을 차질 없이 완료했다. 총괄 책임은 **권혁주** 과장이 맡았으며, 향후에도 분기별 점검 체계를 강화한다."}
+]
+</script>
+
+<script>
+(function(){
+  var data=[], listEl=document.getElementById('list'), countEl=document.getElementById('count'), qEl=document.getElementById('q');
+
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function reEsc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+  function plain(s){return String(s).replace(/\*\*/g,'')}
+
+  // 강조(**) 구간을 나눈 뒤 각 구간에서 키워드를 하이라이트
+  function fmt(text,kw){
+    var re=kw?new RegExp('('+reEsc(kw)+')','gi'):null;
+    return String(text).split(/(\*\*[^*]+\*\*)/).map(function(seg){
+      var bold=/^\*\*[^*]+\*\*$/.test(seg), t=bold?seg.slice(2,-2):seg;
+      var h=re?t.split(re).map(function(p,i){return i%2?'<mark>'+esc(p)+'</mark>':esc(p)}).join(''):esc(t);
+      return bold?'<strong>'+h+'</strong>':h;
+    }).join('');
+  }
+
+  function render(){
+    var kw=qEl.value.trim(), k=kw.toLowerCase();
+    var hits=data.filter(function(c){
+      return !k||plain(c['제목']).toLowerCase().indexOf(k)>-1||plain(c['본문']).toLowerCase().indexOf(k)>-1;
+    });
+    countEl.innerHTML=kw
+      ?'검색 결과 <b>'+hits.length+'</b>건 (전체 '+data.length+'개 장 중)'
+      :'전체 <b>'+data.length+'</b>개 장';
+    if(!hits.length){listEl.innerHTML='<div class="empty">“'+esc(kw)+'”에 해당하는 장이 없습니다. 다른 키워드로 검색해 보세요.</div>';return}
+    listEl.innerHTML=hits.map(function(c){
+      var paras=String(c['본문']).split(/\n{2,}/).map(function(p){return '<p>'+fmt(p,kw)+'</p>'}).join('');
+      return '<article class="card"><h2><span>제'+esc(c['장'])+'장</span>'+fmt(c['제목'],kw)+'</h2>'+paras+'</article>';
+    }).join('');
+  }
+
+  function setData(arr){
+    if(!Array.isArray(arr))throw new Error('배열 형식이 아닙니다');
+    data=arr; render();
+  }
+
+  qEl.addEventListener('input',render);
+
+  document.getElementById('file').addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){try{setData(JSON.parse(r.result))}catch(err){countEl.textContent='JSON을 읽지 못했습니다: '+err.message}};
+    r.readAsText(f,'utf-8');
+  });
+
+  // 같은 폴더의 장데이터.json을 먼저 읽고, 실패하면 내장 데이터를 사용
+  var seed=JSON.parse(document.getElementById('seed').textContent);
+  fetch('장데이터.json').then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(setData).catch(function(){setData(seed)});
+})();
+</script>
+</body>
+</html>
